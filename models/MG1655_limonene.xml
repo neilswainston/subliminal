@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <sbml xmlns:fbc="http://www.sbml.org/sbml/level3/version1/fbc/version2" level="3" sboTerm="SBO:0000624" version="1" xmlns="http://www.sbml.org/sbml/level3/version1/core" fbc:required="false">
-  <model fbc:strict="true" id="iAF1260">
+  <model fbc:strict="true" id="iAF1260_limonene">
     <listOfUnitDefinitions>
       <unitDefinition id="mmol_per_gDW_per_hr">
         <listOfUnits>
@@ -26,23 +26,6 @@
       <parameter constant="true" id="R_EX_cbl1_e_lower_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="-0.01"/>
       <parameter constant="true" id="R_EX_glc__D_e_lower_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="-8"/>
       <parameter constant="true" id="R_EX_o2_e_lower_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="-18.5"/>
-      <parameter constant="true" id="R_MNXR2981_upper_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="1000"/>
-      <parameter constant="true" id="R_MNXR2981_lower_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="-1000"/>
-      <parameter constant="true" id="R_MNXR55238_upper_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="1000"/>
-      <parameter constant="true" id="R_MNXR55238_lower_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="-1000"/>
-      <parameter constant="true" id="R_MNXR69766_upper_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="1000"/>
-      <parameter constant="true" id="R_MNXR69766_lower_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="-1000"/>
-      <parameter constant="true" id="R_MNXR3507_upper_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="1000"/>
-      <parameter constant="true" id="R_MNXR3507_lower_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="-1000"/>
-      <parameter constant="true" id="R_MNXR341_upper_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="1000"/>
-      <parameter constant="true" id="R_MNXR341_lower_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="-1000"/>
-      <parameter constant="true" id="R_MNXR69289_upper_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="1000"/>
-      <parameter constant="true" id="R_MNXR69289_lower_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="-1000"/>
-      <parameter constant="true" id="R_MNXR70380_upper_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="1000"/>
-      <parameter constant="true" id="R_MNXR68753_upper_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="1000"/>
-      <parameter constant="true" id="R_MNXR68753_lower_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="-1000"/>
-      <parameter constant="true" id="R_MNXR2982_upper_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="1000"/>
-      <parameter constant="true" id="R_MNXR2982_lower_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="-1000"/>
     </listOfParameters>
     <listOfCompartments>
       <compartment constant="true" id="p" name="periplasm"/>
@@ -38316,14 +38299,14 @@
       <reaction fast="false" id="R_EX_MNXM956_c" reversible="true" fbc:upperFluxBound="cobra_default_ub" fbc:lowerFluxBound="cobra_default_lb">
         <listOfReactants>
           <speciesReference constant="true" species="M_MNXM956_c" stoichiometry="1"/>
-        </listOfReactants>
+        </listOfReactants>    
       </reaction>
       <reaction fast="false" id="R_EX_5pmev_c" reversible="false" fbc:upperFluxBound="cobra_0_bound" fbc:lowerFluxBound="cobra_0_bound">
         <listOfReactants>
           <speciesReference constant="true" species="M_5pmev_c" stoichiometry="1"/>
         </listOfReactants>
       </reaction>
-      <reaction fast="false" id="R_MNXR2981" reversible="true" name="HMG-CoA reductase; EfMvaE [Enterococcus faecalis] " fbc:upperFluxBound="R_MNXR2981_upper_bound" fbc:lowerFluxBound="R_MNXR2981_lower_bound">
+      <reaction fast="false" id="R_MNXR2981" reversible="true" name="HMG-CoA reductase; EfMvaE [Enterococcus faecalis] " fbc:upperFluxBound="cobra_default_ub" fbc:lowerFluxBound="cobra_default_lb">
         <listOfReactants>
           <speciesReference constant="true" species="M_coa_c" stoichiometry="1"/>
           <speciesReference constant="true" species="M_mev__R_c" stoichiometry="1"/>
@@ -38335,17 +38318,7 @@
           <speciesReference constant="true" species="M_nadph_c" stoichiometry="2"/>
         </listOfProducts>
       </reaction>
-      <reaction fast="false" id="R_MNXR55238" reversible="true" name="Geranyl diphosphate synthase; trGPPS [Abies grandis]" fbc:upperFluxBound="R_MNXR55238_upper_bound" fbc:lowerFluxBound="R_MNXR55238_lower_bound">
-        <listOfReactants>
-          <speciesReference constant="true" species="M_dmpp_c" stoichiometry="1"/>
-          <speciesReference constant="true" species="M_ipdp_c" stoichiometry="1"/>
-        </listOfReactants>
-        <listOfProducts>
-          <speciesReference constant="true" species="M_grdp_c" stoichiometry="1"/>
-          <speciesReference constant="true" species="M_ppi_c" stoichiometry="1"/>
-        </listOfProducts>
-      </reaction>
-      <reaction fast="false" id="R_MNXR69766" reversible="true" name="Phosphomevalonate kinase; mvaK2 [Streptococcus pneumoniae] " fbc:upperFluxBound="R_MNXR69766_upper_bound" fbc:lowerFluxBound="R_MNXR69766_lower_bound">
+      <reaction fast="false" id="R_MNXR69766" reversible="true" name="Phosphomevalonate kinase; mvaK2 [Streptococcus pneumoniae] " fbc:upperFluxBound="cobra_default_ub" fbc:lowerFluxBound="cobra_default_lb">
         <listOfReactants>
           <speciesReference constant="true" species="M_5pmev_c" stoichiometry="1"/>
           <speciesReference constant="true" species="M_atp_c" stoichiometry="1"/>
@@ -38355,7 +38328,7 @@
           <speciesReference constant="true" species="M_adp_c" stoichiometry="1"/>
         </listOfProducts>
       </reaction>
-      <reaction fast="false" id="R_MNXR3507" reversible="true" name="Mevalonate kinase;  mvaK1 [Streptococcus pneumoniae] " fbc:upperFluxBound="R_MNXR3507_upper_bound" fbc:lowerFluxBound="R_MNXR3507_lower_bound">
+      <reaction fast="false" id="R_MNXR3507" reversible="true" name="Mevalonate kinase;  mvaK1 [Streptococcus pneumoniae] " fbc:upperFluxBound="cobra_default_ub" fbc:lowerFluxBound="cobra_default_lb">
         <listOfReactants>
           <speciesReference constant="true" species="M_atp_c" stoichiometry="1"/>
           <speciesReference constant="true" species="M_mev__R_c" stoichiometry="1"/>
@@ -38366,24 +38339,7 @@
           <speciesReference constant="true" species="M_h_c" stoichiometry="1"/>
         </listOfProducts>
       </reaction>
-      <reaction fast="false" id="R_MNXR341" reversible="true" name="Acetyl-CoA acetyltransferase; EfMvaE [Enterococcus faecalis] " fbc:upperFluxBound="R_MNXR341_upper_bound" fbc:lowerFluxBound="R_MNXR341_lower_bound">
-        <listOfReactants>
-          <speciesReference constant="true" species="M_aacoa_c" stoichiometry="1"/>
-          <speciesReference constant="true" species="M_coa_c" stoichiometry="1"/>
-        </listOfReactants>
-        <listOfProducts>
-          <speciesReference constant="true" species="M_accoa_c" stoichiometry="2"/>
-        </listOfProducts>
-      </reaction>
-      <reaction fast="false" id="R_MNXR69289" reversible="true" name="Isopentenyl diphosphate isomerase;  Idi [E. coli MG1655] " fbc:upperFluxBound="R_MNXR69289_upper_bound" fbc:lowerFluxBound="R_MNXR69289_lower_bound">
-        <listOfReactants>
-          <speciesReference constant="true" species="M_dmpp_c" stoichiometry="1"/>
-        </listOfReactants>
-        <listOfProducts>
-          <speciesReference constant="true" species="M_ipdp_c" stoichiometry="1"/>
-        </listOfProducts>
-      </reaction>
-      <reaction fast="false" id="R_MNXR70380" reversible="false" name="4S-limonene synthase; trMpLS (truncated) [Mentha spicata LS]" fbc:upperFluxBound="R_MNXR70380_upper_bound" fbc:lowerFluxBound="cobra_0_bound">
+      <reaction fast="false" id="R_MNXR70380" reversible="false" name="4S-limonene synthase; trMpLS (truncated) [Mentha spicata LS]" fbc:upperFluxBound="cobra_default_ub" fbc:lowerFluxBound="cobra_0_bound">
         <listOfReactants>
           <speciesReference constant="true" species="M_grdp_c" stoichiometry="1"/>
         </listOfReactants>
@@ -38392,7 +38348,7 @@
           <speciesReference constant="true" species="M_ppi_c" stoichiometry="1"/>
         </listOfProducts>
       </reaction>
-      <reaction fast="false" id="R_MNXR68753" reversible="true" name="Diphosphomevalonate decarboxylase; mvaKD [Streptococcus pneumoniae] " fbc:upperFluxBound="R_MNXR68753_upper_bound" fbc:lowerFluxBound="R_MNXR68753_lower_bound">
+      <reaction fast="false" id="R_MNXR68753" reversible="true" name="Diphosphomevalonate decarboxylase; mvaKD [Streptococcus pneumoniae] " fbc:upperFluxBound="cobra_default_ub" fbc:lowerFluxBound="cobra_default_lb">
         <listOfReactants>
           <speciesReference constant="true" species="M_5dpmev_c" stoichiometry="1"/>
           <speciesReference constant="true" species="M_atp_c" stoichiometry="1"/>
@@ -38404,7 +38360,7 @@
           <speciesReference constant="true" species="M_pi_c" stoichiometry="1"/>
         </listOfProducts>
       </reaction>
-      <reaction fast="false" id="R_MNXR2982" reversible="true" name="Hydroxymethylglutaryl-CoA (HMG-CoA) synthase ; EfMvaS [Enterococcus Faecalis] " fbc:upperFluxBound="R_MNXR2982_upper_bound" fbc:lowerFluxBound="R_MNXR2982_lower_bound">
+      <reaction fast="false" id="R_MNXR2982" reversible="true" name="Hydroxymethylglutaryl-CoA (HMG-CoA) synthase ; EfMvaS [Enterococcus Faecalis] " fbc:upperFluxBound="cobra_default_ub" fbc:lowerFluxBound="cobra_default_lb">
         <listOfReactants>
           <speciesReference constant="true" species="M_coa_c" stoichiometry="1"/>
           <speciesReference constant="true" species="M_h_c" stoichiometry="1"/>

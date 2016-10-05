@@ -13,16 +13,16 @@ import cobra
 def set_bounds(model, bounds):
     '''Sets lower and upper bounds.'''
     for reac_id, bound_vals in bounds.iteritems():
-        if bound_vals[0]:
+        if bound_vals[0] is not None:
             model.reactions.get_by_id(reac_id).lower_bound = bound_vals[0]
-        if bound_vals[1]:
+        if bound_vals[1] is not None:
             model.reactions.get_by_id(reac_id).upper_bound = bound_vals[1]
 
 
 def set_objective(model, reac_id):
     '''Sets the objective.'''
     model.objective = reac_id
-    model.reactions.get_by_id(reac_id).upper_bound = float('inf')
+    set_bounds(model, {reac_id: [0, 999999]})
 
 
 def solve(model):

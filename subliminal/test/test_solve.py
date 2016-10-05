@@ -18,25 +18,37 @@ import subliminal.solve as solve
 class Test(unittest.TestCase):
     '''Test class.'''
 
-    def test_solve(self):
+    def test_atp_solve(self):
         '''Tests solve method.'''
-        filename = os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                '../../models/MG1655_limonene.xml')
-        model = cobra.io.read_sbml_model(filename)
+        model = _get_model()
 
-        # Remove duplicate reactions:
-        model.remove_reactions(['MNXR341', 'MNXR55238', 'MNXR69289'])
-
-        # Change glucose and oxygen uptake:
-        solve.set_bounds(model, {'EX_glc__D_e': [-1, None],
-                                 'EX_o2_e': [-float('inf'), None]})
+        # Change glucose uptake:
+        solve.set_bounds(model, {'EX_glc__D_e': [-1, None]})
 
         # Change the objective to ATPM and solve:
         solve.set_objective(model, 'ATPM')
         solve.solve(model)
 
-        self.assertAlmostEqual(model.solution.f, 23.5)
+        self.assertAlmostEqual(model.solution.f, 23.500, 3)
 
+    def test_limonene_solve(self):
+        '''Tests solve method.'''
+        model = _get_model()
+
+        # Change the objective to limonene excretion and solve:
+        solve.set_objective(model, 'EX_MNXM956_c')
+        solve.solve(model)
+
+        solve.print_solution(model)
+
+        self.assertAlmostEqual(model.solution.f, 3.201, 3)
+
+
+def _get_model():
+    '''Gets the model.'''
+    filename = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                            '../../models/MG1655_limonene.xml')
+    return cobra.io.read_sbml_model(filename)
 
 if __name__ == "__main__":
     unittest.main()
