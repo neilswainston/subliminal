@@ -19,15 +19,22 @@ def set_bounds(model, bounds):
             model.reactions.get_by_id(reac_id).upper_bound = bound_vals[1]
 
 
-def set_objective(model, reac_id):
+def set_objective(model, objectives, min_bound=0, max_bound=999999):
     '''Sets the objective.'''
-    model.objective = reac_id
-    set_bounds(model, {reac_id: [0, 999999]})
+    for reaction in model.reactions:
+        reaction.objective_coefficient = 0
+
+    for reac_id, obj_coeff in objectives.iteritems():
+        model.reactions.get_by_id(reac_id).objective_coefficient = obj_coeff
+        set_bounds(model, {reac_id: [min_bound, max_bound]})
 
 
-def solve(model):
-    '''Solves the model, minimising total flux.'''
-    cobra.flux_analysis.parsimonious.optimize_minimal_flux(model)
+def solve(model, pfba=True):
+    '''Solves the model, minimising total flux (if possible).'''
+    if pfba and len(model.objective) == 1:
+        cobra.flux_analysis.parsimonious.optimize_minimal_flux(model)
+    else:
+        model.optimize()
 
 
 def print_solution(model):

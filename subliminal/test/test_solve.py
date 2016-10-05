@@ -26,7 +26,7 @@ class Test(unittest.TestCase):
         solve.set_bounds(model, {'EX_glc__D_e': [-1, None]})
 
         # Change the objective to ATPM and solve:
-        solve.set_objective(model, 'ATPM')
+        solve.set_objective(model, {'ATPM': 1})
         solve.solve(model)
 
         self.assertAlmostEqual(model.solution.f, 23.500, 3)
@@ -36,10 +36,8 @@ class Test(unittest.TestCase):
         model = _get_model()
 
         # Change the objective to limonene excretion and solve:
-        solve.set_objective(model, 'EX_MNXM956_c')
+        solve.set_objective(model, {'EX_MNXM956_c': 1})
         solve.solve(model)
-
-        solve.print_solution(model)
 
         self.assertAlmostEqual(model.solution.f, 3.201, 3)
 
