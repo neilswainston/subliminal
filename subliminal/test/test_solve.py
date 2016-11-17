@@ -11,7 +11,6 @@ import os
 import unittest
 
 import cobra
-
 import subliminal.solve as solve
 
 
