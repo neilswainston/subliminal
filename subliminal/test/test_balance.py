@@ -23,7 +23,7 @@ class Test(unittest.TestCase):
                                 '../../models/MG1655_limonene.xml')
         model = balance.balance_model(cobra.io.read_sbml_model(filename))
         model_balance = balance.check_model_balance(model)
-        self.assertEqual(len(model_balance), 1)
+        self.assertEqual(len(model_balance), 2)
 
     def test_balance_unbalanced(self):
         '''Tests get_elem_comp method for unbalanced reaction.'''

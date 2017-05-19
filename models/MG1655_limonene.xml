@@ -12978,7 +12978,6 @@
           <speciesReference constant="true" species="M_myrsACP_c" stoichiometry="1"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference constant="true" species="M_ACP_c" stoichiometry="1"/>
           <speciesReference constant="true" species="M_lipa_c" stoichiometry="1"/>
         </listOfProducts>
         <fbc:geneProductAssociation>
@@ -13000,7 +12999,7 @@
       </reaction>
       <reaction fast="false" id="R_EDTXS4" reversible="false" name="Endotoxin Synthesis (myristoyl transferase)" fbc:upperFluxBound="cobra_default_ub" fbc:lowerFluxBound="cobra_0_bound">
         <listOfReactants>
-          <speciesReference constant="true" species="M_kdo2lipid4p_c" stoichiometry="1"/>
+          <speciesReference constant="true" species="M_kdo2lipid4p_c" stoichiometry="2"/>
           <speciesReference constant="true" species="M_myrsACP_c" stoichiometry="1"/>
         </listOfReactants>
         <listOfProducts>
@@ -13039,7 +13038,7 @@
         <listOfProducts>
           <speciesReference constant="true" species="M_amp_c" stoichiometry="6"/>
           <speciesReference constant="true" species="M_enter_c" stoichiometry="1"/>
-          <speciesReference constant="true" species="M_h_c" stoichiometry="9"/>
+          <speciesReference constant="true" species="M_h_c" stoichiometry="6"/>
         </listOfProducts>
         <fbc:geneProductAssociation>
           <fbc:geneProductRef fbc:geneProduct="G_b0583"/>
@@ -13048,7 +13047,7 @@
       <reaction fast="false" id="R_ENTERES" reversible="false" name="Enterochelin Esterase" fbc:upperFluxBound="cobra_default_ub" fbc:lowerFluxBound="cobra_0_bound">
         <listOfReactants>
           <speciesReference constant="true" species="M_enter_c" stoichiometry="1"/>
-          <speciesReference constant="true" species="M_h2o_c" stoichiometry="3"/>
+          <speciesReference constant="true" species="M_h2o_c" stoichiometry="2"/>
         </listOfReactants>
         <listOfProducts>
           <speciesReference constant="true" species="M_23dhbzs_c" stoichiometry="3"/>

@@ -12,7 +12,7 @@ import itertools
 from synbiochem.utils import chem_utils, math_utils
 
 
-def balance_model(model):
+def balance_model(model, verbose=True):
     '''Attempts to mass / charge balance models.'''
     for reaction in model.reactions:
         # If NOT exchange reaction:
@@ -24,7 +24,10 @@ def balance_model(model):
 
             # If reaction has been 'fixed' update stoichiometries:
             if result[0] and not result[1]:
-                print reaction.build_reaction_string()
+                if verbose:
+                    print 'Reaction %s fixed:' % reaction.id
+                    print 'FROM: ' + reaction.build_reaction_string()
+
                 metabolites = {met: stoich
                                for met, stoich
                                in reaction.metabolites.iteritems()}
@@ -36,8 +39,12 @@ def balance_model(model):
                     metabolites[metabolite] = val[2]
 
                 reaction.add_metabolites(metabolites)
-                print reaction.build_reaction_string()
-                print '\n'
+
+                if verbose:
+                    print 'TO:   ' + reaction.build_reaction_string()
+            elif not result[0]:
+                if verbose:
+                    print 'Reaction %s unbalanced' % reaction.id
 
     return model
 
@@ -99,7 +106,7 @@ def check_reaction_balance(reaction):
         mass_balance = reaction.check_mass_balance()
 
         return {key: val for key, val in mass_balance.iteritems()
-                if val > 1e-6}
+                if abs(val) > 1e-6}
 
 
 def _get_reaction_def(stoichs, all_formulae, all_charges, all_ids):
