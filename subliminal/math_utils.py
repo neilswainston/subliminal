@@ -63,12 +63,13 @@ def linprog(c_vector, a_eq, b_eq, bounds):
     linp.obj[:] = c_vector
     linp.matrix = [val for row in a_eq for val in row]
 
-    assert linp.simplex() is None
+    linp.simplex()
 
-    for col in linp.cols:
-        col.kind = int
+    if linp.status == 'opt':
+        for col in linp.cols:
+            col.kind = int
 
-    linp.integer()
+        linp.integer()
 
     return linp.status == 'opt', \
         [col.primal for col in linp.cols] \

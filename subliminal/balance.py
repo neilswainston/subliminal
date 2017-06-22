@@ -9,7 +9,9 @@ To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
 '''
 import itertools
 
-from synbiochem.utils import chem_utils, math_utils
+from synbiochem.utils import chem_utils
+
+from subliminal import math_utils
 
 
 def balance_model(model, verbose=True):
