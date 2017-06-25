@@ -47,5 +47,6 @@ def _get_model():
                             '../../models/MG1655_limonene.xml')
     return cobra.io.read_sbml_model(filename)
 
+
 if __name__ == "__main__":
     unittest.main()

@@ -11,6 +11,7 @@ import os
 import unittest
 
 import cobra
+
 from subliminal import balance
 
 

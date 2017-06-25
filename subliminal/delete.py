@@ -34,5 +34,6 @@ def main(args):
         percent_flux = (flux if flux > 1e-6 else 0.0) / max_flux
         print '\t'.join([gene, '{0:.4f}'.format(percent_flux)])
 
+
 if __name__ == '__main__':
     main(sys.argv[1:])
