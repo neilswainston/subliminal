@@ -7,6 +7,7 @@ To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
 
 @author:  neilswainston
 '''
+from collections import Counter
 import itertools
 
 from synbiochem.utils import chem_utils
@@ -30,15 +31,32 @@ def balance_model(model, verbose=True):
                     print 'Reaction %s fixed:' % reaction.id
                     print 'FROM: ' + reaction.build_reaction_string()
 
-                metabolites = {met: stoich
+                # Remove existing metabolites:
+                metabolites = {met: 0
                                for met, stoich
                                in reaction.metabolites.iteritems()}
-                reaction.clear_metabolites()
 
+                reaction.add_metabolites(metabolites, combine=False)
+
+                # Get reaction compartment:
+                cmpt = Counter([met.compartment
+                                for met in metabolites]).most_common(1)[0][0]
+
+                # Add updated metabolites:
                 for val in result[2]:
                     metabolite = [met for met in metabolites
-                                  if met.id == val[3]][0]
-                    metabolites[metabolite] = val[2]
+                                  if met.id == val[3]]
+
+                    if len(metabolite):
+                        metabolites[metabolite[0]] = val[2]
+                    else:
+                        # This makes 2 assumptions:
+                        #
+                        # 1) That h_c, h_m, h2o_c etc are already in the model.
+                        # 2) That the correct compartment for H or H20 is
+                        #    that of the most frequent compartment for the
+                        #    other metabolites in the reaction.
+                        metabolites[val[3] + '_' + cmpt] = val[2]
 
                 reaction.add_metabolites(metabolites)
 
@@ -54,7 +72,8 @@ def balance_model(model, verbose=True):
 def balance_reac(reaction_def, optional_comp=None, max_stoich=8.0):
     '''Applies linear programming to balance reaction.'''
     if optional_comp is None:
-        optional_comp = [('H', 1, 'CHEBI:24636'), ('H2O', 0, 'CHEBI:15377')]
+        # Formula, charge, metabolite id (assume BiGG id)
+        optional_comp = [('H', 1, 'h'), ('H2O', 0, 'h2o')]
 
     all_formulae = [[x[0] for x in reaction_def if x[2] <= 0],
                     [x[0] for x in reaction_def if x[2] > 0]]

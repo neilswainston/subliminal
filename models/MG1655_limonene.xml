@@ -13038,7 +13038,6 @@
         <listOfProducts>
           <speciesReference constant="true" species="M_amp_c" stoichiometry="6"/>
           <speciesReference constant="true" species="M_enter_c" stoichiometry="1"/>
-          <speciesReference constant="true" species="M_h_c" stoichiometry="6"/>
         </listOfProducts>
         <fbc:geneProductAssociation>
           <fbc:geneProductRef fbc:geneProduct="G_b0583"/>

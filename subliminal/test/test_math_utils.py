@@ -10,7 +10,7 @@ To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
 # pylint: disable=too-many-public-methods
 import unittest
 
-import synbiochem.utils.math_utils as math_utils
+from subliminal import math_utils
 
 
 class Test(unittest.TestCase):

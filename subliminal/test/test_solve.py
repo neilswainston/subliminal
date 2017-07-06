@@ -26,9 +26,9 @@ class Test(unittest.TestCase):
 
         # Change the objective to ATPM and solve:
         solve.set_objective(model, {'ATPM': 1})
-        solve.solve(model)
+        solution = solve.solve(model)
 
-        self.assertAlmostEqual(model.solution.f, 23.500, 3)
+        self.assertAlmostEqual(solution.fluxes['ATPM'], 23.500, 3)
 
     def test_limonene_solve(self):
         '''Tests solve method.'''
@@ -36,9 +36,9 @@ class Test(unittest.TestCase):
 
         # Change the objective to limonene excretion and solve:
         solve.set_objective(model, {'EX_MNXM956_c': 1})
-        solve.solve(model)
+        solution = solve.solve(model)
 
-        self.assertAlmostEqual(model.solution.f, 3.201, 3)
+        self.assertAlmostEqual(solution.fluxes['EX_MNXM956_c'], 3.201, 3)
 
 
 def _get_model():

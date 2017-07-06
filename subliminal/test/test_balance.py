@@ -40,7 +40,7 @@ class Test(unittest.TestCase):
         self.assertEqual(sorted([('C3H3O3', -1, 2.0, 'C3H3O3'),
                                  ('C5H7O4', -1, -1.0, 'C5H7O4'),
                                  ('CO2', 0, -1.0, 'CO2'),
-                                 ('H', 1, 1.0, 'CHEBI:24636')]),
+                                 ('H', 1, 1.0, 'h')]),
                          sorted(balanced_def))
 
     def test_balance_balanced(self):

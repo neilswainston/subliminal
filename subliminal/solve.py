@@ -31,10 +31,10 @@ def set_objective(model, objectives, min_bound=0, max_bound=999999):
 
 def solve(model, pfba=True):
     '''Solves the model, minimising total flux (if possible).'''
-    if pfba and len(model.objective) == 1:
-        cobra.flux_analysis.parsimonious.optimize_minimal_flux(model)
+    if pfba:
+        return cobra.flux_analysis.parsimonious.optimize_minimal_flux(model)
     else:
-        model.optimize()
+        return model.optimize()
 
 
 def print_solution(model):
