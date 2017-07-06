@@ -10,17 +10,24 @@ To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
 from collections import Counter
 import itertools
 
-from synbiochem.utils import chem_utils
-
 from subliminal import math_utils
+from synbiochem.utils import chem_utils
+import cobra
 
 
-def balance_model(model, verbose=True):
-    '''Attempts to mass / charge balance models.'''
+def balance_sbml_model(in_filename, out_filename, verbose=True):
+    '''Attempts to mass / charge balance SBML L3 fbc models.'''
+    model = balance_cobra_model(cobra.io.read_sbml_model(in_filename),
+                                verbose=verbose)
+    cobra.io.write_sbml_model(model, out_filename)
+
+
+def balance_cobra_model(model, verbose=True):
+    '''Attempts to mass / charge balance cobra models.'''
     for reaction in model.reactions:
         # If NOT exchange reaction:
         if len(reaction.metabolites) > 1 and \
-                len(check_reaction_balance(reaction)) > 1:
+                len(check_cobra_react_balance(reaction)) > 1:
             reac_def = [(met.formula, met.charge, stoich, met.id)
                         for met, stoich in reaction.metabolites.iteritems()]
             result = balance_reac(reac_def, max_stoich=10)
@@ -104,15 +111,15 @@ def balance_reac(reaction_def, optional_comp=None, max_stoich=8.0):
         balanced_def
 
 
-def check_model_balance(model):
-    '''Checks a model for mass / charge balancing.'''
+def check_cobra_model_balance(model):
+    '''Checks a cobra model for mass / charge balancing.'''
     model_balance = {}
 
     for reaction in model.reactions:
         # If NOT exchange reaction:
         if len(reaction.metabolites) > 1:
             # Check mass balance and remove tiny coefficients due to rounding:
-            reaction_balance = check_reaction_balance(reaction)
+            reaction_balance = check_cobra_react_balance(reaction)
 
             if len(reaction_balance) > 0:
                 model_balance[reaction.id] = reaction_balance
@@ -120,8 +127,8 @@ def check_model_balance(model):
     return model_balance
 
 
-def check_reaction_balance(reaction):
-    '''Checks a reaction for mass / charge balancing.'''
+def check_cobra_react_balance(reaction):
+    '''Checks a cobra reaction for mass / charge balancing.'''
     if len(reaction.metabolites) > 1:
         # Check mass balance and remove tiny coefficients due to rounding:
         mass_balance = reaction.check_mass_balance()

@@ -12,6 +12,7 @@ import sys
 
 from cobra.flux_analysis import single_gene_deletion
 import cobra
+
 import subliminal.solve as solve
 
 
