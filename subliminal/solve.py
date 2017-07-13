@@ -33,8 +33,8 @@ def solve(model, pfba=True):
     '''Solves the model, minimising total flux (if possible).'''
     if pfba:
         return cobra.flux_analysis.parsimonious.optimize_minimal_flux(model)
-    else:
-        return model.optimize()
+
+    return model.optimize()
 
 
 def print_solution(model):

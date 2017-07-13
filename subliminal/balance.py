@@ -54,7 +54,7 @@ def balance_cobra_model(model, verbose=True):
                     metabolite = [met for met in metabolites
                                   if met.id == val[3]]
 
-                    if len(metabolite):
+                    if metabolite:
                         metabolites[metabolite[0]] = val[2]
                     else:
                         # This makes 2 assumptions:
@@ -121,7 +121,7 @@ def check_cobra_model_balance(model):
             # Check mass balance and remove tiny coefficients due to rounding:
             reaction_balance = check_cobra_react_balance(reaction)
 
-            if len(reaction_balance) > 0:
+            if reaction_balance:
                 model_balance[reaction.id] = reaction_balance
 
     return model_balance
