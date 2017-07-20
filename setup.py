@@ -11,7 +11,7 @@ from setuptools import find_packages, setup
 
 
 setup(name='subliminal-py',
-      version='0.1.2',
+      version='0.1.3',
       description='subliminal-py: Python implementation of modules from the ' +
       'SuBliMinaL Toolbox',
       long_description='subliminal-py: Python implementation of modules ' +
@@ -30,5 +30,5 @@ setup(name='subliminal-py',
       keywords='systems biology',
       packages=find_packages(),
       test_suite='subliminal.utils.test',
-      install_requires=['glpk', 'scipy', 'py-lxml', 'python-libsbml', 'cobra',
+      install_requires=['glpk', 'scipy', 'lxml', 'python-libsbml', 'cobra',
                         'synbiochem-py'])
