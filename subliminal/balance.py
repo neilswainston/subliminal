@@ -10,9 +10,9 @@ To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
 from collections import Counter
 import itertools
 
+import cobra
 from subliminal import math_utils
 from synbiochem.utils import chem_utils
-import cobra
 
 
 def balance_sbml_model(in_filename, out_filename, verbose=True):
@@ -80,7 +80,8 @@ def balance_reac(reaction_def, optional_comp=None, max_stoich=8.0):
     '''Applies linear programming to balance reaction.'''
     if optional_comp is None:
         # Formula, charge, metabolite id (assume BiGG id)
-        optional_comp = [('H', 1, 'h'), ('H2O', 0, 'h2o')]
+        optional_comp = [('H', 1, 'CHEBI:15378'),
+                         ('H2O', 0, 'CHEBI:15377')]
 
     all_formulae = [[x[0] for x in reaction_def if x[2] <= 0],
                     [x[0] for x in reaction_def if x[2] > 0]]
