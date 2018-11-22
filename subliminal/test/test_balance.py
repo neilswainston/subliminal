@@ -10,8 +10,9 @@ To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
 import os
 import unittest
 
-from subliminal import balance
 import cobra
+
+from subliminal import balance
 
 
 class Test(unittest.TestCase):

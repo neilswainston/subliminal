@@ -10,8 +10,8 @@ To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
 from itertools import izip
 import sys
 
-from cobra.flux_analysis import single_gene_deletion
 import cobra
+from cobra.flux_analysis import single_gene_deletion
 
 import subliminal.solve as solve
 

@@ -11,8 +11,9 @@ from collections import Counter
 import itertools
 
 import cobra
-from subliminal import math_utils
 from synbiochem.utils import chem_utils
+
+from subliminal import math_utils
 
 
 def balance_sbml_model(in_filename, out_filename, verbose=True):
@@ -136,6 +137,8 @@ def check_cobra_react_balance(reaction):
 
         return {key: val for key, val in mass_balance.iteritems()
                 if abs(val) > 1e-6}
+
+    raise ValueError('No reaction metabolites')
 
 
 def _get_reaction_def(stoichs, all_formulae, all_charges, all_ids):
