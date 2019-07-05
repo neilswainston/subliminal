@@ -19,4 +19,4 @@ def linprog(c_vector, A_eq, b_eq, bounds):
     res = scipy.optimize.linprog(c_vector, A_eq=A_eq, b_eq=b_eq, bounds=bounds)
 
     return res.status == 0, \
-        [round(x, 8) for x in res.x] if res.status == 0 else None
+        [round(x, 6) for x in res.x] if res.status == 0 else None

@@ -20,8 +20,8 @@ class Test(unittest.TestCase):
         '''Tests balance method.'''
         filename = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                 '../../models/MG1655_limonene.xml')
-        model = balance.balance_cobra_model(cobra.io.read_sbml_model(filename))
-        model_balance = balance.check_cobra_model_balance(model)
+        model = balance.balance_model(cobra.io.read_sbml_model(filename))
+        model_balance = balance.check_model(model)
         self.assertEqual(len(model_balance), 2)
 
     def test_balance_unbalanced(self):

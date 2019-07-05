@@ -10,7 +10,7 @@ import cobra
 
 def set_bounds(model, bounds):
     '''Sets lower and upper bounds.'''
-    for reac_id, bound_vals in bounds.iteritems():
+    for reac_id, bound_vals in bounds.items():
         if bound_vals[0] is not None:
             model.reactions.get_by_id(reac_id).lower_bound = bound_vals[0]
         if bound_vals[1] is not None:
@@ -22,7 +22,7 @@ def set_objective(model, objectives, min_bound=0, max_bound=999999):
     for reaction in model.reactions:
         reaction.objective_coefficient = 0
 
-    for reac_id, obj_coeff in objectives.iteritems():
+    for reac_id, obj_coeff in objectives.items():
         model.reactions.get_by_id(reac_id).objective_coefficient = obj_coeff
         set_bounds(model, {reac_id: [min_bound, max_bound]})
 
