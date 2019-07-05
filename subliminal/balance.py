@@ -28,6 +28,10 @@ def balance_model(model, verbose=True):
             reac_def = [(met.formula, met.charge, stoich, met.id)
                         for met, stoich in react.metabolites.items()]
 
+            # Get reaction compartment:
+            cmpt = Counter([met.compartment
+                            for met in react.metabolites]).most_common(1)[0][0]
+
             balanced, unchanged, new_reac_def = \
                 balance_reac(reac_def, max_stoich=10)
 
@@ -38,20 +42,16 @@ def balance_model(model, verbose=True):
                     print('FROM:\t%s' % react.build_reaction_string())
 
                 # Remove existing metabolites:
-                mets = {met: 0
+                mets = {met.id: 0
                         for met, stoich
                         in react.metabolites.items()}
 
                 react.add_metabolites(mets, combine=False)
 
-                # Get reaction compartment:
-                cmpt = Counter([met.compartment
-                                for met in mets]).most_common(1)[0][0]
-
                 # Add updated metabolites:
                 for val in new_reac_def:
                     try:
-                        metabolite = [met for met in mets if met.id == val[3]]
+                        metabolite = [met for met in mets if met == val[3]]
                     except:
                         print(mets)
 
@@ -77,39 +77,37 @@ def balance_model(model, verbose=True):
     return model
 
 
-def balance_reac(reaction_def, optional_comp=None, max_stoich=8.0):
+def balance_reac(react_def, optional_comp=None, max_stoich=8.0):
     '''Applies linear programming to balance reaction.'''
     if optional_comp is None:
         # Formula, charge, metabolite id (assume BiGG id)
         optional_comp = [('H', 1, 'h'),
-                         ('H2O', 0, 'h20')]
+                         ('H2O', 0, 'h2o')]
 
-    all_formulae = [[x[0] for x in reaction_def if x[2] <= 0],
-                    [x[0] for x in reaction_def if x[2] > 0]]
-    all_formulae.extend([[x[0] for x in optional_comp] for _ in range(2)])
+    formulae = [[x[0] for x in react_def if x[2] <= 0],
+                [x[0] for x in react_def if x[2] > 0]]
+    formulae.extend([[x[0] for x in optional_comp] for _ in range(2)])
 
-    all_charges = [[x[1] for x in reaction_def if x[2] <= 0],
-                   [x[1] for x in reaction_def if x[2] > 0]]
-    all_charges.extend([[x[1] for x in optional_comp] for _ in range(2)])
+    charges = [[x[1] for x in react_def if x[2] <= 0],
+               [x[1] for x in react_def if x[2] > 0]]
+    charges.extend([[x[1] for x in optional_comp] for _ in range(2)])
 
-    all_ids = [[x[3] for x in reaction_def if x[2] <= 0],
-               [x[3] for x in reaction_def if x[2] > 0]]
-    all_ids.extend([[x[2] for x in optional_comp] for _ in range(2)])
+    ids = [[x[3] for x in react_def if x[2] <= 0],
+           [x[3] for x in react_def if x[2] > 0]]
+    ids.extend([[x[2] for x in optional_comp] for _ in range(2)])
 
-    all_elem_comp = [[_get_elem_comp(formula, idx)
-                      for formula in formulae]
-                     for idx, formulae in enumerate(all_formulae)]
+    all_elem_comp = [[_get_elem_comp(formula, idx) for formula in formulae]
+                     for idx, formulae in enumerate(formulae)]
 
     (balanced, stoichs) = _optimise(_get_elem_matrix(all_elem_comp,
-                                                     all_charges),
+                                                     charges),
                                     max_stoich, len(optional_comp))
 
-    balanced_def = sorted(_get_reaction_def(stoichs, all_formulae,
-                                            all_charges, all_ids)) \
-        if balanced else reaction_def
+    balanced_def = sorted(_get_react_def(stoichs, formulae, charges, ids)) \
+        if balanced else react_def
 
     return balanced, \
-        balanced and _compare_reaction_defs(reaction_def, balanced_def), \
+        balanced and _compare_react_defs(react_def, balanced_def), \
         balanced_def
 
 
@@ -141,7 +139,7 @@ def check_react(reaction):
     raise ValueError('No reaction metabolites')
 
 
-def _get_reaction_def(stoichs, all_formulae, all_charges, all_ids):
+def _get_react_def(stoichs, all_formulae, all_charges, all_ids):
     '''Formats the input into (formula, charge, stoichiometry) tuples.'''
     return [(a[0], b, a[1] * c, d)
             for a, b, c, d in zip([(x, -1 if idx % 2 == 0 else 1)
@@ -154,7 +152,7 @@ def _get_reaction_def(stoichs, all_formulae, all_charges, all_ids):
             if c > 1e-8]
 
 
-def _compare_reaction_defs(def1, def2):
+def _compare_react_defs(def1, def2):
     '''Returns True/False depending on whether reaction definitions are
     equal.'''
     return def1 is not None and def2 is not None and \
