@@ -18,14 +18,14 @@ setup(name='subliminal-py',
       'from the SuBliMinaL Toolbox',
       url='https://github.com/synbiochem/subliminal-py',
       author='Neil Swainston',
-      author_email='neil.swainston@manchester.ac.uk',
+      author_email='neil.swainston@liverpool.ac.uk',
       license='MIT',
       classifiers=[
                    'Development Status :: 4 - Beta',
                    'Intended Audience :: Developers',
                    'Topic :: Software Development :: Build Tools',
                    'License :: OSI Approved :: MIT License',
-                   'Programming Language :: Python :: 2.7'
+                   'Programming Language :: Python :: 3.7'
       ],
       keywords='systems biology',
       packages=find_packages(),

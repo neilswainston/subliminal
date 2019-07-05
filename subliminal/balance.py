@@ -1,19 +1,17 @@
 '''
-synbiochem (c) University of Manchester 2016
+(c) University of Liverpool 2019
 
-synbiochem is licensed under the MIT License.
+All rights reserved.
 
-To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
-
-@author:  neilswainston
+@author: neilswainston
 '''
 from collections import Counter
 import itertools
 
 import cobra
-from synbiochem.utils import chem_utils
 
 from subliminal import math_utils
+from synbiochem.utils import chem_utils
 
 
 def balance_sbml_model(in_filename, out_filename, verbose=True):
@@ -36,8 +34,8 @@ def balance_cobra_model(model, verbose=True):
             # If reaction has been 'fixed' update stoichiometries:
             if result[0] and not result[1]:
                 if verbose:
-                    print 'Reaction %s fixed:' % reaction.id
-                    print 'FROM: ' + reaction.build_reaction_string()
+                    print('Reaction %s fixed:' % reaction.id)
+                    print('FROM: ' + reaction.build_reaction_string())
 
                 # Remove existing metabolites:
                 metabolites = {met: 0
@@ -69,10 +67,10 @@ def balance_cobra_model(model, verbose=True):
                 reaction.add_metabolites(metabolites)
 
                 if verbose:
-                    print 'TO:   ' + reaction.build_reaction_string()
+                    print('TO:   ' + reaction.build_reaction_string())
             elif not result[0]:
                 if verbose:
-                    print 'Reaction %s unbalanced' % reaction.id
+                    print('Reaction %s unbalanced' % reaction.id)
 
     return model
 
@@ -185,7 +183,7 @@ def _get_elem_matrix(all_elem_comp, all_charges):
     elements = [elem_comp.keys() for elem_comps in all_elem_comp
                 for elem_comp in elem_comps]
 
-    for element in set([item for sublist in elements for item in sublist]):
+    for element in {item for sublist in elements for item in sublist}:
         a_matrix.append([elem_comp[element] if element in elem_comp else 0
                          for elem_comps in all_elem_comp
                          for elem_comp in elem_comps])

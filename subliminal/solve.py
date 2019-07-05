@@ -1,11 +1,9 @@
 '''
-synbiochem (c) University of Manchester 2016
+(c) University of Liverpool 2019
 
-synbiochem is licensed under the MIT License.
+All rights reserved.
 
-To view a copy of this license, visit <http://opensource.org/licenses/MIT/>.
-
-@author:  neilswainston
+@author: neilswainston
 '''
 import cobra
 
@@ -41,6 +39,6 @@ def print_solution(model):
     '''Print Solution.'''
     for reaction in model.reactions:
         if abs(reaction.x) > 1e-6:
-            print reaction.id + '\t' + \
-                reaction.build_reaction_string() + '\t' + \
-                str(reaction.x)
+            print(reaction.id,
+                  reaction.build_reaction_string(),
+                  reaction.x)
