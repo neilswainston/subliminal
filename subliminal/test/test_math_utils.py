@@ -31,8 +31,10 @@ class Test(unittest.TestCase):
         bounds = [(1, 8), (1, 8), (1, 8), (1, 8), (1, 8), (0, 8), (0, 8),
                   (0, 8), (0, 8)]
 
-        success, primals = math_utils.linprog([1] * len(a_matrix[0]), a_matrix,
-                                              [0] * len(a_matrix), bounds)
+        success, primals = math_utils.linprog([1] * len(a_matrix[0]),
+                                              a_matrix,
+                                              [0] * len(a_matrix),
+                                              bounds)
         self.assertTrue(success)
         self.assertEqual(primals, [1, 1, 1, 1, 1, 0, 0, 0, 0])
 
