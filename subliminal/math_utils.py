@@ -5,6 +5,7 @@ All rights reserved.
 
 @author: neilswainston
 '''
+# pylint: disable=invalid-name
 import scipy.optimize
 
 
